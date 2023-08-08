@@ -1,0 +1,23 @@
+body {
+    background-color: black;
+    color: lightgrey;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: auto auto auto;
+}
+
+.grid-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.left {
+    justify-content: start;
+}
+
+.right {
+    justify-content: end;
+}
