@@ -1,5 +1,5 @@
 const gameState = {
-    resourceCount: 0,
+    waterCount: 0,
     gatherMult: 1,
     gatherMultCost: 100,
     gatherers: 0,
@@ -9,20 +9,20 @@ const gameState = {
 }
 
 setInterval(function() {
-    gameState.resourceCount += 1 * gameState.gatherers * gameState.hirelingMult;
-    document.getElementById("resource-count").innerHTML = gameState.resourceCount;
+    gameState.waterCount += 1 * gameState.gatherers * gameState.hirelingMult;
+    document.getElementById("resource-count").innerHTML = gameState.waterCount;
 }, 100)
 
 function gather() {
-    gameState.resourceCount += 1 * gameState.gatherMult;
-    document.getElementById("resource-count").innerHTML = gameState.resourceCount;
+    gameState.waterCount += 1 * gameState.gatherMult;
+    document.getElementById("resource-count").innerHTML = gameState.waterCount;
 }
 
 function gatherMultUp() {
     if (costCheck(gameState.gatherMultCost)) {
         gameState.gatherMult += 1;
-        gameState.resourceCount -= gameState.gatherMultCost;
-        gameState.gatherMultCost *= Math.exp(1.3,gatherMult)
+        gameState.waterCount -= gameState.gatherMultCost;
+        gameState.gatherMultCost *= Math.exp(1.3,gameState.gatherMult)
         document.getElementById("mult-display").innerHTML = gameState.gatherMult;
     }
 }
@@ -31,7 +31,7 @@ function buyGatherers() {
     if (costCheck(gameState.gathererCost)) {
         gameState.gatherers += 1;
         gameState.gathererCost *= Math.exp(1.1,gameState.gatherers)
-        gameState.resourceCount -= gameState.gathererCost
+        gameState.waterCount -= gameState.gathererCost
         document.getElementById("hire-count").innerHTML = gameState.gatherers;
     }
 }
@@ -44,7 +44,7 @@ function hireMultUp() {
 }
 
 function costCheck(price) {
-    if((gameState.resourceCount - price) >= 0) {
+    if((gameState.waterCount - price) >= 0) {
         return true;
     } else {
         return false;
