@@ -22,19 +22,25 @@ function gatherMultUp() {
     if (costCheck(gameState.gatherMultCost)) {
         gameState.gatherMult += 1;
         gameState.resourceCount -= gameState.gatherMultCost;
-        gameState.gatherMultCost *= 1.3;
+        gameState.gatherMultCost *= Math.exp(1.3,gatherMult)
         document.getElementById("mult-display").innerHTML = gameState.gatherMult;
     }
 }
 
 function buyGatherers() {
-    gameState.gatherers += 1;
-    document.getElementById("hire-count").innerHTML = gameState.gatherers;
+    if (costCheck(gameState.gathererCost)) {
+        gameState.gatherers += 1;
+        gameState.gathererCost *= Math.exp(1.1,gameState.gatherers)
+        gameState.resourceCount -= gameState.gathererCost
+        document.getElementById("hire-count").innerHTML = gameState.gatherers;
+    }
 }
 
 function hireMultUp() {
-    gameState.hirelingMult += 1;
-    document.getElementById("hireling-multiplier").innerHTML = gameState.hirelingMult;
+    if (costCheck(gameState.hirelingMultCost)) {
+        gameState.hirelingMult += 1;
+        document.getElementById("hireling-multiplier").innerHTML = gameState.hirelingMult;
+    }
 }
 
 function costCheck(price) {
