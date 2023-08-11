@@ -6,47 +6,88 @@ const gameState = {
     gathererCost: 50,
     hirelingMult: 1,
     hirelingMultCost: 1000
+};
+
+const air = {
+    name: "Air",
+    total: 0,
+    tickRate: 0.01,
+    accumulatorSize: 1.0,
+    accumulatorPurity: 1,
+    cloneCost: 150,
+    costCheck: function(price) {
+        if (this.total - price >= 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+};
+const balloon = {
+    strength: 0.1,
+    total: 0,
+    cost: 10
 }
+const water = {
+    name: "Water",
+    total: 0,
+    tickRate: 0.00,
+    accumulatorSize: 0,
+    accumulatorPurity: 1,
+    cloneCost: 150,
+    costCheck: function(price) {
+        if (this.total - price >= 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+};
+const earth = {
+    name: "Earth",
+    total: 0,
+    tickRate: 0.00,
+    accumulatorSize: 0,
+    accumulatorPurity: 1,
+    cloneCost: 150,
+    costCheck: function(price) {
+        if (this.total - price >= 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+};
+const fire = {
+    name: "Fire",
+    total: 0,
+    tickRate: 0.00,
+    accumulatorSize: 0,
+    accumulatorPurity: 1,
+    cloneCost: 150,
+    costCheck: function(price) {
+        if (this.total - price >= 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+};
 
 setInterval(function() {
-    gameState.waterCount += 1 * gameState.gatherers * gameState.hirelingMult;
-    document.getElementById("resource-count").innerHTML = gameState.waterCount;
-}, 100)
+    air.total += air.tickRate * air.accumulatorPurity * air.accumulatorSize;
+    document.getElementById("air-count").innerHTML = air.total.toFixed(2);
+    document.getElementById("airbag-percent").innerHTML = ((air.total / air.cloneCost) * 100).toFixed(2);
+    // water.total += water.tickRate;
+    // earth.total += earth.tickRate;
+    // fire.total += fire.tickRate;
+}, 100);
 
-function gather() {
-    gameState.waterCount += 1 * gameState.gatherMult;
-    document.getElementById("resource-count").innerHTML = gameState.waterCount;
-}
-
-function gatherMultUp() {
-    if (costCheck(gameState.gatherMultCost)) {
-        gameState.gatherMult += 1;
-        gameState.waterCount -= gameState.gatherMultCost;
-        gameState.gatherMultCost *= Math.exp(1.3,gameState.gatherMult);
-        document.getElementById("mult-display").innerHTML = gameState.gatherMult;
+function buyBalloon() {
+    if (air.costCheck(balloon.cost)) {
+        air.total -= balloon.cost;
+        balloon.total++;
+        air.accumulatorSize++;
+        balloon.cost += Math.exp(1.1,balloon.total);
     }
-}
-
-function buyGatherers() {
-    if (costCheck(gameState.gathererCost)) {
-        gameState.gatherers += 1;
-        gameState.waterCount -= gameState.gathererCost;
-        gameState.gathererCost *= Math.exp(1.1,gameState.gatherers);
-        document.getElementById("hire-count").innerHTML = gameState.gatherers;
-    }
-}
-
-function hireMultUp() {
-    if (costCheck(gameState.hirelingMultCost)) {
-        gameState.hirelingMult += 1;
-        document.getElementById("hireling-multiplier").innerHTML = gameState.hirelingMult;
-    }
-}
-
-function costCheck(price) {
-    if((gameState.waterCount - price) >= 0) {
-        return true;
-    } else {
-        return false;
-    }
-}
+};

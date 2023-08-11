@@ -1,23 +1,46 @@
 body {
-    background-color: black;
+    background-color: #1F1F1F;
     color: lightgrey;
 }
 
-.grid-container {
+.game {
     display: grid;
-    grid-template-columns: auto auto auto;
+    grid-template-areas: "air air dungeon store"
+                         "water water dungeon store"
+                         "earth earth dungeon store"
+                         "fire fire dungeon store";
+    padding: 20px;
+}
+
+#air {
+    grid-area: air;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    border: 2px dotted skyblue;
+}
+
+#dungeon {
+    grid-area: dungeon;
+    display: flex;
+    flex-direction: column;
+    border: 2px dotted darkred;
+}
+
+#store {
+    grid-area: store;
+    display: flex;
+    flex-direction: column;
+    border: 2px dotted goldenrod;
 }
 
 .grid-item {
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
 }
 
-.left {
-    justify-content: start;
-}
-
-.right {
-    justify-content: end;
+.hidden {
+    display: none;
 }

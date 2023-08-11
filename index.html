@@ -5,29 +5,24 @@
     </head>
 
     <body>
-        <div class="grid-container">
-            <div class="grid-item left">Resources</div>
-            <div class="grid-item">
-                <button type="button" onclick="gather()">Gather</button>
+        <div class="game">
+            <div id="air">
+                <div class="grid-item">
+                    <div>Air:</div>
+                    <div id="air-count"></div>
+                </div>
+                <div class="grid-item">
+                    <div>Clone Percentage:</div>
+                    <div id="airbag-percent"></div>
+                </div>
             </div>
-            <div class="grid-item right">Three</div>
-            <div class="grid-item left" id="resource-count">0</div>
-            <div class="grid-item">Center</div>
-            <div class="grid-item right">
-                <button type="button" onclick="gatherMultUp()">Multiplier</button>
+            <div id="dungeon" class="grid-item">
+                <div>Dungeon Placeholder</div>
             </div>
-            <div class="grid-item left">
-                <button type="button" onclick="hireMultUp()">Ling Multiplier</button>
+            <div id="store" class="grid-item">
+                <div>Store</div>
+                <div><button type="button" onclick="buyBalloon()">Buy a balloon</button></div>
             </div>
-            <div class="grid-item">
-                <button type="button" onclick="buyGatherers()">Hire Lings</button>
-            </div>
-            <div class="grid-item right" id="mult-display">
-                1
-            </div>
-            <div class="grid-item left" id="hireling-multiplier">1</div>
-            <div class="grid-item" id="hire-count">0</div>
-            <div class="grid-item right">12</div>
         </div>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
         <script type="text/javascript" src="js/script.js"></script>
