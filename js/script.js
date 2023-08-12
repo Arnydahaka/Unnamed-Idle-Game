@@ -14,7 +14,6 @@ const air = {
     tickRate: 0.01,
     accumulatorSize: 1.0,
     accumulatorPurity: 1,
-    cloneCost: 150,
     costCheck: function(price) {
         if (this.total - price >= 0) {
             return true;
@@ -27,7 +26,13 @@ const balloon = {
     strength: 0.1,
     total: 0,
     cost: 10
-}
+};
+
+const airbag = {
+    lifeTotal: 100,
+    cost: 150
+};
+
 const water = {
     name: "Water",
     total: 0,
@@ -77,7 +82,7 @@ const fire = {
 setInterval(function() {
     air.total += air.tickRate * air.accumulatorPurity * air.accumulatorSize;
     document.getElementById("air-count").innerHTML = air.total.toFixed(2);
-    document.getElementById("airbag-percent").innerHTML = ((air.total / air.cloneCost) * 100).toFixed(2);
+    document.getElementById("airbag-percent").innerHTML = ((air.total / airbag.cost) * 100).toFixed(2);
     // water.total += water.tickRate;
     // earth.total += earth.tickRate;
     // fire.total += fire.tickRate;
