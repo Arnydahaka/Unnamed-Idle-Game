@@ -1,13 +1,4 @@
-const gameState = {
-    waterCount: 0,
-    gatherMult: 1,
-    gatherMultCost: 100,
-    gatherers: 0,
-    gathererCost: 50,
-    hirelingMult: 1,
-    hirelingMultCost: 1000
-};
-
+// Initialize Element Objects
 const air = {
     name: "Air",
     total: 0,
@@ -22,17 +13,6 @@ const air = {
         }
     }
 };
-const balloon = {
-    strength: 0.1,
-    total: 0,
-    cost: 10
-};
-
-const airbag = {
-    lifeTotal: 100,
-    cost: 150
-};
-
 const water = {
     name: "Water",
     total: 0,
@@ -79,7 +59,47 @@ const fire = {
     }
 };
 
-setInterval(function() {
+// Initialize Clone Item Objects
+const balloon = {
+    extraLife: 10,
+    total: 0,
+    cost: 10
+};
+
+// Item Purchase Functions
+function buyBalloon() {
+    if (air.costCheck(balloon.cost)) {
+        air.total -= balloon.cost;
+        balloon.total++;
+        balloon.cost += Math.exp(1.1,balloon.total);
+    }
+};
+
+// Initialize Clone Objects
+const airbag = {
+    lifeTotal: 100,
+    cost: 150
+};
+
+// Initialize Dungeons
+// VERY WIP
+const dungeon1 = {
+    durationInSeconds: 60,
+    damagePerSecond: 15,
+    runDugeon: function(cloneLife) {
+        var curDur = this.durationInSeconds
+        var dungeonRun = setInterval(function() {
+            cloneLife -= 1.5;
+            curDur -= 0.1;
+            if (curDur == 0) {
+                clearInterval(dungeonRun)
+            }
+        })
+    }
+}
+
+// Main Game Loop
+const gameLoop = setInterval(function() {
     air.total += air.tickRate * air.accumulatorPurity * air.accumulatorSize;
     document.getElementById("air-count").innerHTML = air.total.toFixed(2);
     document.getElementById("airbag-percent").innerHTML = ((air.total / airbag.cost) * 100).toFixed(2);
@@ -87,12 +107,3 @@ setInterval(function() {
     // earth.total += earth.tickRate;
     // fire.total += fire.tickRate;
 }, 100);
-
-function buyBalloon() {
-    if (air.costCheck(balloon.cost)) {
-        air.total -= balloon.cost;
-        balloon.total++;
-        air.accumulatorSize++;
-        balloon.cost += Math.exp(1.1,balloon.total);
-    }
-};
