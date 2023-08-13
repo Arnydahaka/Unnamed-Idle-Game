@@ -102,4 +102,5 @@ const gameLoop = setInterval(function() {
     // fire.total += fire.tickRate;
 }, 100);
 
+window.money = money
 export {money,buyBalloon}

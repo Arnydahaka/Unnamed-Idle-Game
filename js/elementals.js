@@ -24,5 +24,5 @@ class airbagTemplate {
         }, 100)
     }
 }
-
+window.money = money
 export {airbagTemplate, airbagStats}
