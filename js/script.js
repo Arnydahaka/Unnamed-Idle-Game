@@ -62,7 +62,8 @@ const fire = {
 };
 
 //Initialize Money
-export var money = 0;
+var money = 0;
+export {money}
 
 // Initialize Clone Item Objects
 const balloon = {
