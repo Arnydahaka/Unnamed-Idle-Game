@@ -6,8 +6,6 @@ const airbagStats = {
     cost: 150
 };
 
-export {airbagStats}
-
 class airbagTemplate {
     constructor(lifeTotal) {
         this.life = lifeTotal;
@@ -27,4 +25,4 @@ class airbagTemplate {
     }
 }
 
-export {airbagTemplate}
+export {airbagTemplate, airbagStats}

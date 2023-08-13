@@ -1,4 +1,4 @@
-import * as elementals from './elementals.js'
+import { airbagStats, airbagTemplate} from "./elementals"
 
 // Initialize Element Objects
 const air = {
