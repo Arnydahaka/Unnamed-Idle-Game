@@ -1,4 +1,4 @@
-import * as elementals from 'elementals.js'
+import * as elementals from './elementals.js'
 
 // Initialize Element Objects
 const air = {
