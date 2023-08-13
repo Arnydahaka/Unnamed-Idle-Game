@@ -1,5 +1,3 @@
-import { airbagStats, airbagTemplate} from "./elementals.js"
-
 // Initialize Element Objects
 const air = {
     name: "Air",
@@ -15,7 +13,6 @@ const air = {
         }
     }
 };
-window.air = air;
 const water = {
     name: "Water",
     total: 0,
@@ -62,6 +59,65 @@ const fire = {
     }
 };
 
+// Initialize Clone Objects
+const airbagStats = {
+    lifeTotal: 100,
+    cost: 150,
+    clones: class Queue {
+        constructor() {
+            this.elements = {};
+            this.head = 0;
+            this.tail = 0;
+        }
+
+        add(clone) {
+            this.elements[this.tail] = clone;
+            this.tail++;
+        }
+
+        remove() {
+            const item = this.elements[this.head];
+            delete this.elements[this.head];
+            this.head++;
+            return item;
+        }
+
+        peek() {
+            return this.elements[this.head];
+        }
+
+        get length() {
+            return this.tail - this.head;
+        }
+
+        get isEmpty() {
+            return this.length === 0;
+        }
+    }
+};
+
+// Class for making multiples of clones
+class airbagTemplate {
+    constructor(lifeTotal) {
+        this.life = lifeTotal;
+    }
+    runDungeon(dungeon) {
+        var tick = 1;
+        var dngn = setInterval(function() {
+            airbag.life -= dungeon.damagePerTick;
+            console.log(dungeon.moneyPerTick)
+            money += dungeon.moneyPerTick;
+            document.getElementById("money-count").innerHTML = money.toFixed(2);
+            if(airbag.life <= 0 || dungeon.durationInticks <= tick) {
+                airbagStats.clones.remove();
+                clearInterval(dngn);
+            }
+            tick++;
+            console.log(`CloneLife: ${airbag.life}. Tick: ${tick}`)
+        }, 100)
+    }
+}
+
 //Initialize Money
 var money = 0;
 
@@ -80,6 +136,7 @@ function buyBalloon() {
         balloon.cost += Math.exp(1.1,balloon.total);
     }
 };
+
 //Using this instead of onclick to make it easier to access the buyballoon function
 document.getElementById("balloon-button").addEventListener("click",buyBalloon)
 
@@ -96,15 +153,13 @@ const gameLoop = setInterval(function() {
     document.getElementById("air-count").innerHTML = air.total.toFixed(2);
     document.getElementById("airbag-percent").innerHTML = ((air.total / airbagStats.cost) * 100).toFixed(2);
     if(air.total >= airbagStats.cost) {
-        var airbag = new airbagTemplate(airbagStats.cost);
-        window.airbag = airbag;
+        // adds a new airbag to the clones queue
+        airbagStats.clones.add(new airbagTemplate(airbagStats.cost));
         air.total -= airbagStats.cost;
-        airbag.runDungeon(dungeon1);
+        // removes the
+        airbagStats.clones.tail.runDungeon(dungeon1);
     }
     // water.total += water.tickRate;
     // earth.total += earth.tickRate;
     // fire.total += fire.tickRate;
 }, 100);
-
-window.money = money
-export {money}
