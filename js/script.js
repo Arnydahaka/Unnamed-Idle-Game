@@ -96,7 +96,7 @@ const gameLoop = setInterval(function() {
     document.getElementById("air-count").innerHTML = air.total.toFixed(2);
     document.getElementById("airbag-percent").innerHTML = ((air.total / airbagStats.cost) * 100).toFixed(2);
     if(air.total >= airbagStats.cost) {
-        airbag = new airbagTemplate(airbagStats.cost)
+        var airbag = new airbagTemplate(airbagStats.cost)
         air.total -= airbagStats.cost;
         airbag.runDungeon(dungeon1);
     }
