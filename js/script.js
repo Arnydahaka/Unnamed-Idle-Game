@@ -63,7 +63,7 @@ const fire = {
 };
 
 //Initialize Money
-let money = 0;
+var money = 0;
 
 // Initialize Clone Item Objects
 const balloon = {
