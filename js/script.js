@@ -63,7 +63,6 @@ const fire = {
 
 //Initialize Money
 var money = 0;
-export {money}
 
 // Initialize Clone Item Objects
 const balloon = {
@@ -73,7 +72,7 @@ const balloon = {
 };
 
 // Item Purchase Functions
-export function buyBalloon() {
+function buyBalloon() {
     if (air.costCheck(balloon.cost)) {
         air.total -= balloon.cost;
         balloon.total++;
@@ -102,3 +101,5 @@ const gameLoop = setInterval(function() {
     // earth.total += earth.tickRate;
     // fire.total += fire.tickRate;
 }, 100);
+
+export {money,buyBalloon}
