@@ -80,7 +80,7 @@ function buyBalloon() {
         balloon.cost += Math.exp(1.1,balloon.total);
     }
 };
-document.getElementById("balloon-button").addEventListener(buyBalloon,click)
+document.getElementById("balloon-button").addEventListener(buyBalloon,"click")
 
 // Initialize Dungeons
 const dungeon1 = {
