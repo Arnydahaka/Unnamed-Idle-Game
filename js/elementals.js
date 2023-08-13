@@ -14,6 +14,7 @@ class airbagTemplate {
         var tick = 1;
         var dngn = setInterval(function() {
             airbag.life -= dungeon.damagePerTick;
+            console.log(dungeon.moneyPerTick)
             money += dungeon.moneyPerTick;
             document.getElementById("money-count").innerHTML = money.toFixed(2);
             if(airbag.life <= 0 || dungeon.durationInticks <= tick) {
