@@ -15,6 +15,7 @@ const air = {
         }
     }
 };
+window.air = air;
 const water = {
     name: "Water",
     total: 0,
