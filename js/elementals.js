@@ -1,4 +1,4 @@
-import money from './script.js'
+import {money} from './script.js'
 
 // Initialize Clone Objects
 export const airbagStats = {
