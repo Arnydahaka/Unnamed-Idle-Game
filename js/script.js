@@ -79,6 +79,7 @@ function buyBalloon() {
         balloon.cost += Math.exp(1.1,balloon.total);
     }
 };
+document.getElementById("balloon-button").addEventListener(buyBalloon,click)
 
 // Initialize Dungeons
 const dungeon1 = {
@@ -103,4 +104,4 @@ const gameLoop = setInterval(function() {
 }, 100);
 
 window.money = money
-export {money,buyBalloon}
+export {money}
