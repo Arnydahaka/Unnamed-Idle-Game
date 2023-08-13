@@ -19,12 +19,21 @@
             <div id="dungeon" class="grid-item">
                 <div>Dungeon Placeholder</div>
             </div>
-            <div id="store" class="grid-item">
-                <div>Store</div>
-                <div><button type="button" onclick="buyBalloon()">Buy a balloon</button></div>
+            <div id="store">
+                <div class="store-row">
+                    <div class="store-col">Store</div>
+                    <div>Money:<span id="money-count"></span></div>
+                </div>
+                <div class="store-row">
+                    <div class="store-col">Balloon</div>
+                    <div>
+                        <button type="button" onclick="buyBalloon()">Buy a balloon</button>
+                    </div>
+                </div>
             </div>
         </div>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
-        <script type="text/javascript" src="js/script.js"></script>
+        <script type="module" src="js/script.js"></script>
+        <script type="module" src="js/elementals.js"></script>
     </body>
 </html>

@@ -1,3 +1,5 @@
+import * as elementals from 'elementals.js'
+
 // Initialize Element Objects
 const air = {
     name: "Air",
@@ -59,6 +61,9 @@ const fire = {
     }
 };
 
+//Initialize Money
+export var money = 0;
+
 // Initialize Clone Item Objects
 const balloon = {
     extraLife: 10,
@@ -75,34 +80,23 @@ function buyBalloon() {
     }
 };
 
-// Initialize Clone Objects
-const airbag = {
-    lifeTotal: 100,
-    cost: 150
-};
-
 // Initialize Dungeons
-// VERY WIP
 const dungeon1 = {
-    durationInSeconds: 60,
-    damagePerSecond: 15,
-    runDugeon: function(cloneLife) {
-        var curDur = this.durationInSeconds
-        var dungeonRun = setInterval(function() {
-            cloneLife -= 1.5;
-            curDur -= 0.1;
-            if (curDur == 0) {
-                clearInterval(dungeonRun)
-            }
-        })
-    }
+    durationInticks: 600,
+    damagePerTick: 1.5,
+    moneyPerTick: 0.01
 }
 
 // Main Game Loop
 const gameLoop = setInterval(function() {
     air.total += air.tickRate * air.accumulatorPurity * air.accumulatorSize;
     document.getElementById("air-count").innerHTML = air.total.toFixed(2);
-    document.getElementById("airbag-percent").innerHTML = ((air.total / airbag.cost) * 100).toFixed(2);
+    document.getElementById("airbag-percent").innerHTML = ((air.total / airbagStats.cost) * 100).toFixed(2);
+    if(air.total >= airbagStats.cost) {
+        airbag = new airbagTemplate(airbagStats.cost)
+        air.total -= airbagStats.cost;
+        airbag.runDungeon(dungeon1);
+    }
     // water.total += water.tickRate;
     // earth.total += earth.tickRate;
     // fire.total += fire.tickRate;

@@ -32,6 +32,11 @@ div {
 #store {
     grid-area: store;
     border: 2px dotted goldenrod;
+    justify-content: space-between;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .grid-item {
@@ -41,6 +46,17 @@ div {
 
 #airbag-percent {
     text-align: center;
+}
+
+.store-row {
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+.store-col + div {
+    height: 100%;
 }
 
 .hidden {
