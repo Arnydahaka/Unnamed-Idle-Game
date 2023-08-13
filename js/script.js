@@ -80,7 +80,8 @@ function buyBalloon() {
         balloon.cost += Math.exp(1.1,balloon.total);
     }
 };
-document.getElementById("balloon-button").addEventListener(buyBalloon,"click")
+//Using this instead of onclick to make it easier to access the buyballoon function
+document.getElementById("balloon-button").addEventListener("click",buyBalloon)
 
 // Initialize Dungeons
 const dungeon1 = {
