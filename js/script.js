@@ -73,7 +73,7 @@ const balloon = {
 };
 
 // Item Purchase Functions
-function buyBalloon() {
+export function buyBalloon() {
     if (air.costCheck(balloon.cost)) {
         air.total -= balloon.cost;
         balloon.total++;
