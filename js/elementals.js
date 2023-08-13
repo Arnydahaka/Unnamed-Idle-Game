@@ -1,12 +1,14 @@
 import {money} from './script.js'
 
 // Initialize Clone Objects
-export const airbagStats = {
+const airbagStats = {
     lifeTotal: 100,
     cost: 150
 };
 
-export class airbagTemplate {
+export {airbagStats}
+
+class airbagTemplate {
     constructor(lifeTotal) {
         this.life = lifeTotal;
     }
@@ -24,3 +26,5 @@ export class airbagTemplate {
         }, 100)
     }
 }
+
+export {airbagTemplate}
