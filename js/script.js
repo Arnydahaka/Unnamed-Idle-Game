@@ -103,5 +103,4 @@ const gameLoop = setInterval(function() {
 }, 100);
 
 window.money = money
-export {money}
-export default buyBalloon()
+export {money,buyBalloon}
