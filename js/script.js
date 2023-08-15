@@ -63,37 +63,8 @@ const fire = {
 const airbagStats = {
     lifeTotal: 100,
     cost: 150,
-    clones: class Queue {
-        constructor() {
-            this.elements = {};
-            this.head = 0;
-            this.tail = 0;
-        }
-
-        add(clone) {
-            this.elements[this.tail] = clone;
-            this.tail++;
-        }
-
-        remove() {
-            const item = this.elements[this.head];
-            delete this.elements[this.head];
-            this.head++;
-            return item;
-        }
-
-        peek() {
-            return this.elements[this.head];
-        }
-
-        get length() {
-            return this.tail - this.head;
-        }
-
-        get isEmpty() {
-            return this.length === 0;
-        }
-    }
+    maxAirbags: 1,
+    clones: []
 };
 
 // Class for making multiples of clones
@@ -101,19 +72,20 @@ class airbagTemplate {
     constructor(lifeTotal) {
         this.life = lifeTotal;
     }
-    runDungeon(dungeon) {
+    runDungeon(dungeon,life) {
+        console.log("Running Dungeon")
         var tick = 1;
         var dngn = setInterval(function() {
-            airbag.life -= dungeon.damagePerTick;
+            life -= dungeon.damagePerTick;
             console.log(dungeon.moneyPerTick)
             money += dungeon.moneyPerTick;
             document.getElementById("money-count").innerHTML = money.toFixed(2);
-            if(airbag.life <= 0 || dungeon.durationInticks <= tick) {
-                airbagStats.clones.remove();
+            if(life <= 0 || dungeon.durationInticks <= tick) {
+                airbagStats.clones = airbagStats.clones.slice(1,airbagStats.clones.length);
                 clearInterval(dngn);
             }
             tick++;
-            console.log(`CloneLife: ${airbag.life}. Tick: ${tick}`)
+            console.log(`CloneLife: ${life}. Tick: ${tick}`)
         }, 100)
     }
 }
@@ -154,10 +126,13 @@ const gameLoop = setInterval(function() {
     document.getElementById("airbag-percent").innerHTML = ((air.total / airbagStats.cost) * 100).toFixed(2);
     if(air.total >= airbagStats.cost) {
         // adds a new airbag to the clones queue
-        airbagStats.clones.add(new airbagTemplate(airbagStats.cost));
-        air.total -= airbagStats.cost;
-        // removes the
-        airbagStats.clones.tail.runDungeon(dungeon1);
+        if (airbagStats.clones.length < airbagStats.maxAirbags) {
+            airbagStats.clones.push(new airbagTemplate(airbagStats.lifeTotal));
+            air.total -= airbagStats.cost;
+        }
+        var lastAirbag = airbagStats.clones[airbagStats.clones.length - 1]
+        var life = lastAirbag.life
+        lastAirbag.runDungeon(dungeon1,life)
     }
     // water.total += water.tickRate;
     // earth.total += earth.tickRate;
