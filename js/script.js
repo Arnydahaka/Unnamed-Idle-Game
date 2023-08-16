@@ -77,15 +77,15 @@ class airbagTemplate {
         var tick = 1;
         var dngn = setInterval(function() {
             life -= dungeon.damagePerTick;
-            console.log(dungeon.moneyPerTick)
+            console.log(`Money before tick: ${money}`);
             money += dungeon.moneyPerTick;
+            console.log(`Money after tick: ${money}`);
             document.getElementById("money-count").innerHTML = money.toFixed(2);
             if(life <= 0 || dungeon.durationInticks <= tick) {
                 airbagStats.clones = airbagStats.clones.slice(1,airbagStats.clones.length);
                 clearInterval(dngn);
             }
             tick++;
-            console.log(`CloneLife: ${life}. Tick: ${tick}`)
         }, 100)
     }
 }
