@@ -73,13 +73,13 @@ class airbagTemplate {
         this.life = lifeTotal;
     }
     runDungeon(dungeon,life) {
-        console.log("Running Dungeon")
-        var tick = 1;
-        var dngn = setInterval(function() {
+        console.log("Running Dungeon");
+        let tick = 1;
+        let dngn = setInterval(function() {
             life -= dungeon.damagePerTick;
-            console.log(`Money before tick: ${money}`);
+            // console.log(`Money before tick: ${money}`);
             money += dungeon.moneyPerTick;
-            console.log(`Money after tick: ${money}`);
+            // console.log(`Money after tick: ${money}`);
             document.getElementById("money-count").innerHTML = money.toFixed(2);
             if(life <= 0 || dungeon.durationInticks <= tick) {
                 airbagStats.clones = airbagStats.clones.slice(1,airbagStats.clones.length);
@@ -127,12 +127,12 @@ const gameLoop = setInterval(function() {
     if(air.total >= airbagStats.cost) {
         // adds a new airbag to the clones queue
         if (airbagStats.clones.length < airbagStats.maxAirbags) {
-            airbagStats.clones.push(new airbagTemplate(airbagStats.lifeTotal));
+            let clone = new airbagTemplate(airbagStats.lifeTotal);
+            airbagStats.clones.push(clone);
             air.total -= airbagStats.cost;
+            let life = clone.life
+            clone.runDungeon(dungeon1,life)
         }
-        var lastAirbag = airbagStats.clones[airbagStats.clones.length - 1]
-        var life = lastAirbag.life
-        lastAirbag.runDungeon(dungeon1,life)
     }
     // water.total += water.tickRate;
     // earth.total += earth.tickRate;
