@@ -59,9 +59,17 @@ const fire = {
     }
 };
 
+// Initialize Clone Item Objects
+const balloon = {
+    extraLife: 10,
+    total: 0,
+    cost: 10
+};
+
 // Initialize Clone Objects
 const airbagStats = {
     lifeTotal: 100,
+    lifeBase: 100,
     cost: 150,
     maxAirbags: 1,
     clones: []
@@ -77,9 +85,7 @@ class airbagTemplate {
         let tick = 1;
         let dngn = setInterval(function() {
             life -= dungeon.damagePerTick;
-            // console.log(`Money before tick: ${money}`);
             money += dungeon.moneyPerTick;
-            // console.log(`Money after tick: ${money}`);
             document.getElementById("money-count").innerHTML = money.toFixed(2);
             if(life <= 0 || dungeon.durationInticks <= tick) {
                 airbagStats.clones = airbagStats.clones.slice(1,airbagStats.clones.length);
@@ -93,24 +99,19 @@ class airbagTemplate {
 //Initialize Money
 var money = 0;
 
-// Initialize Clone Item Objects
-const balloon = {
-    extraLife: 10,
-    total: 0,
-    cost: 10
-};
-
 // Item Purchase Functions
 function buyBalloon() {
-    if (air.costCheck(balloon.cost)) {
-        air.total -= balloon.cost;
+    if (money >= balloon.cost) {
+        money -= balloon.cost;
         balloon.total++;
         balloon.cost += Math.exp(1.1,balloon.total);
+        document.getElementById("balloon-cost").innerHTML = balloon.cost;
+        airbagStats.lifeTotal = airbagStats.lifeBase + balloon.total * 10;
     }
 };
 
 //Using this instead of onclick to make it easier to access the buyballoon function
-document.getElementById("balloon-button").addEventListener("click",buyBalloon)
+document.getElementById("balloon-button").addEventListener("click",buyBalloon);
 
 // Initialize Dungeons
 const dungeon1 = {
@@ -121,6 +122,7 @@ const dungeon1 = {
 
 // Main Game Loop
 const gameLoop = setInterval(function() {
+    document.getElementById("balloon-cost").innerHTML = balloon.cost;
     air.total += air.tickRate * air.accumulatorPurity * air.accumulatorSize;
     document.getElementById("air-count").innerHTML = air.total.toFixed(2);
     document.getElementById("airbag-percent").innerHTML = ((air.total / airbagStats.cost) * 100).toFixed(2);
